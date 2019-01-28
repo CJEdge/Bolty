@@ -57,7 +57,7 @@ public class BoltyMovement : MonoBehaviour
         if (shield.shielding == false && !levelFinished) // you cant move and shield or if the level is over
         {
             //DUCK--------------------------------------------------
-            if (Input.GetKey(KeyCode.DownArrow) && grounded && !movingInX && !boosting) // you can duck when you are on the ground, not moving and not boosting
+            if (joystick.Vertical <= -0.6f && grounded && !movingInX && !boosting) // you can duck when you are on the ground, not moving and not boosting
             {
                 anim.SetBool("Duck", true);
                 duck = true;
@@ -66,34 +66,21 @@ public class BoltyMovement : MonoBehaviour
                 anim.SetBool("Duck", false); 
                 duck = false;
 
-            // BOOST----------------------------------------------
-            if (Input.GetKey(KeyCode.Space) && !duck) // you can boost when you are not ducking
-            {
-                boosting = true;
-            }
-            else
-            {
-                boosting = false;
-                if( !movingInX && !grounded)
-                {
-                    falling = true;
-                    anim.SetBool("Fall", true); //if you arent boosting and you arent moving you will fall
-                }
-            }
+            
             //HOVER MOVE----------------------------------------------
-            if ((!Input.GetKey(KeyCode.UpArrow) && (!Input.GetKey(KeyCode.LeftArrow)) && (!Input.GetKey(KeyCode.RightArrow))) && grounded && !movingInX && !airDashing && boosting && !falling) // you can hover when you only boost and you are on the ground an not moving
+            if (joystick.Horizontal == 0 && joystick.Vertical == 0 && grounded && !movingInX && !airDashing && boosting && !falling) // you can hover when you only boost and you are on the ground an not moving
             {
                 anim.SetBool("HoverMove", true);
                 hoverMove = true;
             }
 
             //JUMP-----------------------------------------------------------
-            if (Input.GetKey(KeyCode.UpArrow) && grounded && !movingInX && boosting && !falling) // you can jump when ou are on the ground, not moving
+            if (joystick.Vertical >= 0.6f && grounded && !movingInX && boosting && !falling) // you can jump when ou are on the ground, not moving
             {
                 anim.SetBool("Jump", true);
                 jumping = true;
             }
-            if (Input.GetKey(KeyCode.UpArrow) && !movingInX && hoverMove && !jumping) // you can jump from the hover move if you are not moving or already jumping
+            if (joystick.Vertical >= 0.6f && !movingInX && hoverMove && !jumping) // you can jump from the hover move if you are not moving or already jumping
             {
                 anim.SetBool("Jump", true);
                 jumping = true;
@@ -109,7 +96,7 @@ public class BoltyMovement : MonoBehaviour
             }
 
             //RIGHT DASH------------------------------------------------------------------
-            if ((Input.GetKey(KeyCode.RightArrow)) && !dashing && grounded && !movingInX && !jumping && dashReset) // you can dash when you are on the ground,not moving and not already dashing
+            if (joystick.Horizontal >= 0.6f && !dashing && grounded && !movingInX && !jumping && dashReset) // you can dash when you are on the ground,not moving and not already dashing
             {
                 if (facingLeft)
                 {
@@ -124,7 +111,7 @@ public class BoltyMovement : MonoBehaviour
 
             }
             //LEFT DASH-----------------------------------------------------------------------
-            if ((Input.GetKey(KeyCode.LeftArrow)) && !dashing && grounded && !movingInX && !jumping && dashReset)
+            if (joystick.Horizontal <= -0.6f && !dashing && grounded && !movingInX && !jumping && dashReset)
             {
                 if (!facingLeft)
                 {
@@ -139,7 +126,7 @@ public class BoltyMovement : MonoBehaviour
             }
 
             //DASH RESET
-            if (Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow)) // you must let go of the arrow keys again to dash
+            if (joystick.Horizontal == 0) // you must let go of the arrow keys again to dash
             {
                 dashReset = true;
             }
@@ -147,7 +134,7 @@ public class BoltyMovement : MonoBehaviour
             //AIRBORN DASH-----------------------------------------------------------------------
             if (hovering && !airDashing &&!movingInX)
             {
-                if (Input.GetKeyDown(KeyCode.RightArrow))
+                if (joystick.Horizontal >= 0.6f)
                 {
                     if (facingLeft)
                     {
@@ -159,7 +146,7 @@ public class BoltyMovement : MonoBehaviour
                         airDashing = true;
                     }
                 }
-                if (Input.GetKeyDown(KeyCode.LeftArrow))
+                if (joystick.Horizontal <= -0.6f)
                 {
                     if (!facingLeft)
                     {
@@ -175,6 +162,20 @@ public class BoltyMovement : MonoBehaviour
         }
     }
 
+    // BOOST----------------------------------------------
+    public void Boosting()
+    {
+        boosting = true;
+    }
+    public void NotBoosting()
+    {
+        boosting = false;
+        if (!movingInX && !grounded)
+        {
+            falling = true;
+            anim.SetBool("Fall", true); //if you arent boosting and you arent moving you will fall
+        }
+    }
     //GRAVITY FREEZING----------------------------------------
     void FreezeGravity()
     {

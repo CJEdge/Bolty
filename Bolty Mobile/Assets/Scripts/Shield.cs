@@ -17,20 +17,7 @@ public class Shield : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.Z) && playerInput.dashing == false && shieldMeter > 0)
-        {
-            if (playerInput.grounded == true)
-            {
-                StandingShield();
-                shieldMeter -= Time.deltaTime;
-            }
-            else HoveringShield();
-            shieldMeter -= Time.deltaTime;
-        }
-        else if (!Input.GetKey(KeyCode.Z))
-        {
-            NoShield();
-        }
+        
     }
 
     void NoShield()
@@ -56,5 +43,28 @@ public class Shield : MonoBehaviour
         anim.SetBool("NoShield", false);
         anim.SetBool("StandingShield", false);
         anim.SetBool("HoveringShield", true);
+    }
+
+    public void Shielding()
+    {
+        if (playerInput.dashing == false && shieldMeter > 0)
+        {
+            if (playerInput.grounded == true)
+            {
+                StandingShield();
+            }
+            else HoveringShield();
+            shieldMeter -= Time.deltaTime;
+        }
+    }
+
+    public void NotShielding()
+        {
+            NoShield();
+        }
+
+    public void DepriciateShield()
+    {
+        shieldMeter -= Time.deltaTime;
     }
 }
