@@ -54,6 +54,9 @@ public class BoltyMovement : MonoBehaviour
     
     void Update()
     {
+
+        print("furthest left" + onFurthestLeft);
+        print("furthest right" + onFurthestRight);
         if (shield.shielding == false && !levelFinished) // you cant move and shield or if the level is over
         {
             //DUCK--------------------------------------------------

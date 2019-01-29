@@ -146,7 +146,7 @@ GameObject:
   - component: {fileID: 8211069337074483351}
   - component: {fileID: 1095760780948539688}
   m_Layer: 5
-  m_Name: Next Level
+  m_Name: Retry
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
