@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Bolt : MonoBehaviour
 {
-    public float seenEverySeconds;
     public GameObject spawner;
     public float speed;
     public float damage = 10;

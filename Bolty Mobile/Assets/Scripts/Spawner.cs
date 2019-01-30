@@ -4,55 +4,32 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour {
 
-    public GameObject[] boltPrefabArray;
-    public int projectileCount = 10;
+    public int projectileCount;
     BoltCounter boltCounter;
+    public bool spawn = true;
+    [SerializeField] float minSpawnDelay;
+    [SerializeField] float maxSpawnDelay;
+    [SerializeField] Bolt boltPrefab;
 
-
-    // Use this for initialization
-    void Start () {
+   
+   
+    IEnumerator Start()
+    {
         boltCounter = FindObjectOfType<BoltCounter>();
-
-    }
-	
-	// Update is called once per frame
-	void Update () {
-		foreach (GameObject thisAttacker in boltPrefabArray)
+        while (projectileCount > 0 && spawn)
         {
-            if(isTimeToSpawn(thisAttacker))
-            {
-                Spawn(thisAttacker);
-            }
+            yield return new WaitForSeconds(Random.Range(minSpawnDelay, maxSpawnDelay));
+            Spawn();
         }
-	}
-    bool isTimeToSpawn (GameObject boltGameObject)
+    }
+
+    void Spawn()
     {
-        Bolt bolt = boltGameObject.GetComponent<Bolt>();
-
-        float meanSpawnDelay = bolt.seenEverySeconds;
-        float spawnsPerSecond = 1 / meanSpawnDelay;
-
-        if (projectileCount<= 0)
         {
-            return false;
+            Instantiate(boltPrefab, transform.position, transform.rotation);
+            projectileCount -= 1;
+            boltCounter.UpdateCounter();
         }
-        if (Time.deltaTime > meanSpawnDelay)
-        {
-            Debug.LogWarning("spawn rate capped by frame rate");
-        }
-
-        float threshold = spawnsPerSecond * Time.deltaTime / 5;
-
-        return (Random.value < threshold);
-      
     }
-
-    void Spawn(GameObject myGameObject)
-    {
-        GameObject myBolt = Instantiate(myGameObject) as GameObject;
-        myBolt.transform.parent = transform;
-        myBolt.transform.position = transform.position;
-        projectileCount -= 1;
-        boltCounter.UpdateCounter();
-    }
+    
 }
