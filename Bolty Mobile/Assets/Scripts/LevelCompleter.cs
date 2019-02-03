@@ -27,13 +27,11 @@ public class LevelCompleter : MonoBehaviour
 
     private void OnBecameVisible()
     {
-        print("im visible");
         directionalArrow.SetActive(false);
     }
 
     private void OnBecameInvisible()
     {
-        print("im invisible");
         directionalArrow.SetActive(true);
     }
 }

@@ -4,29 +4,29 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    public float health;
+    public static float PlayerHealth;
     public GameObject gameOver;
-    Animator anim;
+    private BoltyMovement boltyMovement;
 
     private void Start()
     {
-        health = 50;
-        anim = GetComponent<Animator>();
+        boltyMovement = FindObjectOfType<BoltyMovement>();
+        PlayerHealth = 50;
         gameOver.SetActive(false);
     }
 
     private void Update()
     {
-        if (health <= 0)
+        if (PlayerHealth <= 0)
         {
+            boltyMovement.Die();
             gameOver.SetActive(true);
-            anim.SetBool("Die", true);
         }
     }
 
     public void DealDamage(float damage)
     {
-        health -= damage;
+        PlayerHealth -= damage;
     }
 
     public void DestroyObject()
