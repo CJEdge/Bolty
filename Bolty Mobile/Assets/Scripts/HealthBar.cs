@@ -17,6 +17,6 @@ public class HealthBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        healthBar.value =Health.PlayerHealth; 
+        healthBar.value = playerHealth.health; 
     }
 }

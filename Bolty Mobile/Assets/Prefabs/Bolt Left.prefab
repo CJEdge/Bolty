@@ -96,6 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dcdc71886974584d9f1d40922b6e210, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  seenEverySeconds: 1
   spawner: {fileID: 185442236036771922, guid: 46f5878c9e4c9e04698e845a98bd08cf, type: 3}
   speed: 5
   damage: 10

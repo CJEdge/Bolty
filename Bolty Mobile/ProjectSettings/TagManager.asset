@@ -45,15 +45,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Platforms
-    uniqueID: 1666355623
-    locked: 0
-  - name: Player
-    uniqueID: 1553054837
-    locked: 0
-  - name: Shield
-    uniqueID: 2328859445
-    locked: 0
   - name: Bolts
     uniqueID: 2910292817
     locked: 0
