@@ -96,11 +96,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dcdc71886974584d9f1d40922b6e210, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seenEverySeconds: 1
   spawner: {fileID: 185442236036771922, guid: 46f5878c9e4c9e04698e845a98bd08cf, type: 3}
   speed: -5
   damage: 10
-  hitFX: {fileID: 4133158005028358182, guid: 903e2a5c1db4bb74da1b67279a9a7c89, type: 3}
+  hitFX: {fileID: 4133158005028358182, guid: 452e710d380d25345875009f7ff80642, type: 3}
 --- !u!61 &721854423260996622
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -183,7 +182,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1482579257
-  m_SortingLayer: 2
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_RenderMode: 0
   m_SortMode: 0

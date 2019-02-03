@@ -24,10 +24,9 @@ public class Bolt : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        BoltyMovement bolty = collider.gameObject.GetComponent<BoltyMovement>();
         Health health = collider.gameObject.GetComponent<Health>();
         Shield shield = collider.gameObject.GetComponent<Shield>();
-        if (bolty && health)
+        if (health)
         {
             Instantiate(hitFX, transform.position, myRot);
             health.DealDamage(damage);

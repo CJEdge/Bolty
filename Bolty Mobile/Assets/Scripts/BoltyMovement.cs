@@ -315,6 +315,10 @@ public class BoltyMovement : MonoBehaviour
         theScale.x *= -1;
         transform.localScale = theScale;
     }
+    public void Die()
+    {
+        anim.SetBool("Die", true);
+    }
 
     public void ResetTransform()
     {
